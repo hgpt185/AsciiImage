@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: "./build.sh"
-    startCommand: "gunicorn asciiserver.wsgi:application"
+    startCommand: "gunicorn asciiserver.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
       - key: PYTHON_VERSION
         value: 3.9.16
@@ -13,6 +13,7 @@ services:
       - key: DEBUG
         value: False
       - key: ALLOWED_HOSTS
-        sync: false
+        value: ascii-image-converter.onrender.com
     healthCheckPath: /api/info/
+
 
