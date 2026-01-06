@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: ascii-image-converter
+    runtime: python
+    plan: free
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn asciiserver.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.9.16
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: False
+      - key: ALLOWED_HOSTS
+        sync: false
+    healthCheckPath: /api/info/
+
